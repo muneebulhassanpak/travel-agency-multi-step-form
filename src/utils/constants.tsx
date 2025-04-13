@@ -1,6 +1,6 @@
 export const multistepFormStepsMap = [
   {
-    name: "Personal Details",
+    value: "Personal Details",
     componentName: "PersonalDetails",
   },
   {
@@ -18,5 +18,32 @@ export const multistepFormStepsMap = [
   {
     name: "Summary & Confirmation",
     componentName: "SummaryAndConfirmation",
+  },
+];
+
+export const activities = [
+  {
+    value: "Beach",
+    label: "Beach",
+  },
+  {
+    value: "Hiking",
+    label: "Hiking",
+  },
+  {
+    value: "Sightseeing",
+    label: "Sightseeing",
+  },
+  {
+    value: "Museums",
+    label: "Museums",
+  },
+  {
+    value: "Food Tours",
+    label: "Food Tours",
+  },
+  {
+    value: "Scuba Diving",
+    label: "Scuba Diving",
   },
 ];

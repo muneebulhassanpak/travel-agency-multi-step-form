@@ -40,3 +40,42 @@ export const travelPreferenceSchema = z.object({
 });
 
 export type travelPreferenceSchemaType = z.infer<typeof travelPreferenceSchema>;
+
+export const destinationAndActivities = z
+  .object({
+    destinationCountry: z.enum([
+      "Pakistan",
+      "Turkey",
+      "Thailand",
+      "Dubai",
+      "Other",
+    ]),
+    otherCountry: z.string().optional(),
+
+    activities: z
+      .array(
+        z.object({
+          value: z.string(),
+          label: z.string(),
+        })
+      )
+      .min(1, { message: "At least 1 activity is required" }),
+
+    specialRequests: z.string().optional(),
+  })
+  .refine(
+    (data) => {
+      if (data.destinationCountry === "Other") {
+        return !!data.otherCountry && data.otherCountry.trim().length > 0;
+      }
+      return true;
+    },
+    {
+      message: "Please enter a country when 'Other' is selected",
+      path: ["otherCountry"],
+    }
+  );
+
+export type DestinationAndActivitiesType = z.infer<
+  typeof destinationAndActivities
+>;
