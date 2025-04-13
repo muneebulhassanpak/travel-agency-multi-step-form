@@ -15,3 +15,28 @@ export const personalDetailsSchema = z.object({
 });
 
 export type personalDetailsSchemaType = z.infer<typeof personalDetailsSchema>;
+
+export const travelPreferenceSchema = z.object({
+  numberOfTravelers: z
+    .number({ invalid_type_error: "Number of travelers is required" })
+    .min(1, { message: "At least 1 traveler is required" }),
+  startDate: z.date({
+    required_error: "Start date is required",
+  }),
+  endDate: z.date({
+    required_error: "End date is required",
+  }),
+  preferredTravelType: z.enum(["Leisure", "Adventure", "Cultural", "Luxury"], {
+    errorMap: () => ({ message: "Please select a travel type" }),
+  }),
+
+  travelBudget: z.enum(["Under $500", "$500-$1000", "$1000-$2000", "$2000+"], {
+    errorMap: () => ({ message: "Please select a budget range" }),
+  }),
+
+  hotelStarRating: z.enum(["3", "4", "5"]).optional(),
+
+  privateTransport: z.boolean().optional(),
+});
+
+export type travelPreferenceSchemaType = z.infer<typeof travelPreferenceSchema>;
