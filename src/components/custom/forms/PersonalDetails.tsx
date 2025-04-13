@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { PhoneInput } from "../phone-input";
 
 const PersonalDetails = () => {
   const form = useForm<personalDetailsSchemaType>({
@@ -28,7 +29,7 @@ const PersonalDetails = () => {
       fullName: "",
       email: "",
       phoneNumber: "",
-      preferredContactMethod: "Text",
+      preferredContactMethod: "WhatsApp",
     },
   });
 
@@ -57,7 +58,7 @@ const PersonalDetails = () => {
           control={form.control}
           name="email"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-full">
               <FormLabel>Email</FormLabel>
               <FormControl>
                 <Input type="email" placeholder="john@example.com" {...field} />
@@ -71,11 +72,12 @@ const PersonalDetails = () => {
             control={form.control}
             name="phoneNumber"
             render={({ field }) => (
-              <FormItem className="w-full">
-                <FormLabel>Phone Number</FormLabel>
-                <FormControl>
-                  <Input type="tel" placeholder="+1234567890" {...field} />
+              <FormItem className="flex flex-col items-start w-full">
+                <FormLabel className="text-left">Phone Number</FormLabel>
+                <FormControl className="w-full">
+                  <PhoneInput placeholder="Enter a phone number" {...field} />
                 </FormControl>
+
                 <FormMessage />
               </FormItem>
             )}

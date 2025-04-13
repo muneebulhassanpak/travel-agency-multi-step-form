@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { isValidPhoneNumber } from "react-phone-number-input";
 
 export const personalDetailsSchema = z.object({
   fullName: z
@@ -7,8 +8,7 @@ export const personalDetailsSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address" }),
   phoneNumber: z
     .string()
-    .min(10, { message: "Phone number must be at least 10 digits" })
-    .max(15, { message: "Phone number must be less than 15 digits" }),
+    .refine(isValidPhoneNumber, { message: "Invalid phone number" }),
   preferredContactMethod: z.enum(["Phone", "WhatsApp", "Text"], {
     errorMap: () => ({ message: "Please select a contact method" }),
   }),
